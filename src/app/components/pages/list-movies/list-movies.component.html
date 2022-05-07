@@ -1,0 +1,31 @@
+<div class="upper-container">
+    <mat-select (selectionChange)="onSelectionChanged()" [(value)]="category" class="select">
+        <mat-option value="all">All</mat-option>
+        <mat-option value="movie">Movies</mat-option>
+        <mat-option value="tv">Tv shows</mat-option>
+      </mat-select>
+    <mat-paginator 
+        [length]="this.totalResults" 
+        [pageSize]="this.pageSize"
+        [pageIndex]="this.pageIndex"
+        [pageSizeOptions]="[20, 60, 100]" 
+        aria-label="Select page"  
+        class="paginator"               
+        (page)="pageEvent = getServerData($event)">
+    </mat-paginator>
+</div>
+<div class="container">
+    <mat-card class="example-card" *ngFor="let movie of movies" (click)="onMovieSelected(movie.id, movie.first_air_date)">
+        <mat-card-header class="card-header">
+        <div mat-card-avatar  class="rating">{{convertRatingToString(movie.vote_average)}}</div>
+        <mat-card-title class="autoScaleText">{{movie.original_name ?? movie.original_title}}</mat-card-title>
+        <mat-card-subtitle>Release date:{{movie.release_date ?? movie.first_air_date}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="IMAGE_PATH + movie.backdrop_path" alt="Title screen of movie">
+        <mat-card-content class="content">
+            <p>
+                {{movie.overview}}
+            </p>
+        </mat-card-content>
+    </mat-card>
+</div>
