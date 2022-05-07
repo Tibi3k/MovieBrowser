@@ -1,7 +1,7 @@
 <div class="upper-container">
     <form (submit)="onSearch()" [formGroup]="form">    
       <mat-form-field class="example-form-field" appearance="fill" standalone>
-        <mat-label>Search for movies</mat-label>
+        <mat-label>Search for tv shows</mat-label>
         <input matInput type="text" formControlName="name">
       </mat-form-field>
       <button mat-raised-button type="submit" color="primary">search</button>
@@ -18,14 +18,14 @@
 </div>
 <div class="container">
     <app-card-view 
-      *ngFor="let movie of movies" 
-      type="movie"
-      [id]="this.movie.id"
-      [releaseDate]="this.movie.release_date"
-      [rating]="this.movie.vote_average"
-      [title]="this.movie.title"
-      [imagePath]="this.movie.backdrop_path"
-      [overview]="this.movie.overview"
+      *ngFor="let serie of series" 
+      type="tv"
+      [id]="this.serie.id"
+      [releaseDate]="this.serie.first_air_date"
+      [rating]="this.serie.vote_average"
+      [title]="this.serie.name == '' ? this.serie.original_name : this.serie.name"
+      [imagePath]="this.serie.backdrop_path"
+      [overview]="this.serie.overview"
       >
     </app-card-view>
 </div>

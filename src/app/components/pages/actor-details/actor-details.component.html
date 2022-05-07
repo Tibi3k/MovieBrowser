@@ -1,0 +1,54 @@
+<div class="content-container">
+    <div class="primary-container">
+        <div class="profile-image" *ngIf="this.actorDetails?.profile_path != null">
+            <img [src]="this.IMAGE_PATH + this.actorDetails?.profile_path" >
+        </div>
+        <div class="data-display">
+            <h1 class="data-field">{{this.actorDetails?.name}}</h1> 
+            <div class="aliases data-field" *ngIf="this.actorDetails?.also_known_as?.length != 0">
+                <h3>Also known as</h3>
+                <i *ngFor="let alias of this.actorDetails?.also_known_as" class="alias">{{alias}},</i>
+            </div>
+            <div *ngIf="this.actorDetails?.homepage != null" class="data-field">
+                <a [href]="this.actorDetails?.homepage"><h3>{{this.actorDetails?.name}}'s home page<mat-icon>link</mat-icon></h3></a>
+            </div>
+            <div class="data-field" *ngIf="this.actorDetails?.birthday != null">
+                <h3>Birth</h3>
+                <i>{{this.actorDetails?.place_of_birth}}</i><br>
+                <i>{{this.actorDetails?.birthday}}</i>
+            </div>
+            <div *ngIf="this.actorDetails?.biography != ''" class="biography data-field">
+                <h3>Biography</h3>
+                <div>{{this.actorDetails?.biography}}</div>  
+            </div>
+
+        </div>
+    </div>
+    <div class="bottom-container">
+        <div>
+            <h3>Movie credits</h3>
+            <mat-chip-list aria-label="Fish selection">
+                    <mat-chip 
+                      color="primary" 
+                      selected 
+                      *ngFor="let movie of actorMovieParticipations?.cast"
+                      [routerLink]="['/moviedetails', movie.id]">
+                      {{movie.title}}
+                    </mat-chip>
+              </mat-chip-list>
+        </div>
+        <div>
+            <h3>Tv show credits</h3>
+            <mat-chip-list aria-label="Fish selection">
+                    <mat-chip 
+                      color="primary" 
+                      selected 
+                      *ngFor="let movie of actorSeriesParticipations?.cast"
+                      [routerLink]="['/seriesdetials',movie.id]">
+                      {{movie.name}}
+                    </mat-chip>
+              </mat-chip-list>
+        </div>
+    </div>
+
+</div>

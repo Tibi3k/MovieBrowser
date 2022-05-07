@@ -1,0 +1,16 @@
+.container{
+    margin-top: 15px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.upper-container{
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+}
+
+.genre{
+    display: flex;
+}

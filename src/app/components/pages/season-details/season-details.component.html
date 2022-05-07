@@ -1,0 +1,46 @@
+<div class="content-container">
+    <div class="card-content">
+        <mat-card class="example-card">
+            <mat-card-header class="card-header">
+            <mat-card-title class="autoScaleText">{{season?.name}}</mat-card-title>
+            <mat-card-subtitle>Release date:{{season?.air_date}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="IMAGE_PATH + 'w780' +season?.poster_path" alt="Title screen of movie" *ngIf="season?.poster_path != undefined">
+            <mat-card-content class="content">
+                <div *ngIf="this.season?.overview != ''">
+                    <h3> Overview</h3>   
+                    <p class="long-text">
+                        {{season?.overview}}
+                    </p>
+                </div>
+                <mat-expansion-panel *ngFor="let episode of season?.episodes; let i = index">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        <span *ngIf="!episode.name.includes('Episode')" class="episode-display">Episode {{i+1}}</span>
+                        {{episode.name}}
+                    </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <img mat-card-image [src]="IMAGE_PATH + 'original' +episode?.still_path" alt="Title screen of movie" *ngIf="episode?.still_path != undefined">
+                    <div *ngIf="episode?.overview != ''">
+                        <h3>Overview</h3>
+                        <p class="long-text">
+                            {{episode?.overview}}
+                        </p>
+                    </div>
+                    <div *ngIf="episode?.vote_average != 0">
+                        <h3>Rating: {{episode?.vote_average}}</h3>
+                    </div>
+                    <div  *ngIf="episode?.guest_stars != undefined && episode?.guest_stars!.length > 0"> 
+                        <h3>Guest actors</h3>
+                        <mat-chip-list aria-label="Fish selection">
+                            <mat-chip  [routerLink]="['/actordetials', actor.id]" color="primary" selected *ngFor="let actor of episode?.guest_stars">{{actor.name}}</mat-chip>
+                        </mat-chip-list>
+                    </div>
+
+                
+                  </mat-expansion-panel>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+</div>

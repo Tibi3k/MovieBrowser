@@ -1,1 +1,62 @@
-<p>{{this.currentMovie?.overview}}</p>
+<div class="content-container">
+    <div class="card-content">
+        <mat-card class="example-card">
+            <mat-card-header class="card-header">
+            <div mat-card-avatar  class="rating">{{movie?.vote_average ?? '-'}}</div>
+            <mat-card-title class="autoScaleText">{{movie?.original_title}}</mat-card-title>
+            <mat-card-subtitle>Release date:{{movie?.release_date}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="IMAGE_PATH + movie?.backdrop_path" alt="Title screen of movie" *ngIf="movie?.backdrop_path != undefined">
+            <mat-card-content class="content">
+                <h3> Overview</h3>   
+                <p>
+                    {{movie?.overview}}
+                </p>
+                <h3>Genres</h3>
+                <mat-chip-list aria-label="Fish selection">
+                    <mat-chip color="primary" selected *ngFor="let genre of movie?.genres">{{genre.name}}</mat-chip>
+                  </mat-chip-list>
+                <h3>Producing companies</h3>
+                <mat-chip-list aria-label="Fish selection">
+                    <mat-chip color="primary" selected *ngFor="let company of movie?.production_companies" >{{company.name}}</mat-chip>
+                  </mat-chip-list>
+                <h3>Actors</h3>
+                  <mat-chip-list aria-label="Fish selection">
+                      <mat-chip color="primary" selected *ngFor="let actor of actors" [routerLink]="['/actordetials', actor.id]">{{actor.name}}</mat-chip>
+                    </mat-chip-list>
+                <h3>Costs</h3>
+                <div class="costs">
+                    <span>Budget: 
+                        <span class="loss">{{movie?.budget | number}}$</span>
+                    </span>
+                    <span>Revenue:
+                        <span class="win">{{movie?.revenue | number}} $</span>
+                    </span>
+                    <span>Profit:
+                        <span [ngClass]="movie?.revenue - movie?.budget > 0 ? 'win' : 'loss'"> {{movie?.revenue - movie?.budget | number}} $</span>
+                    </span>
+                </div>
+                <h3>Similar shows</h3>
+                <mat-chip-list aria-label="Fish selection">
+                    <div (click)="onSimilarSelected(movie.id)" *ngFor="let movie of similarMovies">
+                        <mat-chip color="primary" selected >{{movie.title}}</mat-chip>
+                    </div>
+                  </mat-chip-list>
+                <h3>Reviews</h3>
+                <div class="reviews">
+                    <div class="review" *ngFor="let review of this.reviews">
+                        <div class="review-header">
+                            <span>{{review.author_details.username}}</span>
+                            <span><i>{{review.created_at | date:'longDate'}}</i></span>
+                            <span><b>Rating: {{review.author_details.rating ?? '-'}}</b></span>
+                        </div>
+                        <div class="review-content">
+                            {{review.content}}
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+</div>

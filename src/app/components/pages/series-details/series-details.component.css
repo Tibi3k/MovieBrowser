@@ -26,23 +26,6 @@ img {
     width: 100%;
 }
 
-.loss{
-    color: red;
-}
-
-.win{
-    color: green;
-}
-
-.costs{
-    display: flex;
-    justify-content: flex-start;
-    font-size: medium;
-}
-.costs > span{
-    margin-right: 20px;
-}
-
 .review-header > span {
     margin-right: 20px;
 }

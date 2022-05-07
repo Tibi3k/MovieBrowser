@@ -1,0 +1,60 @@
+<div class="content-container">
+    <div class="card-content">
+        <mat-card class="example-card">
+            <mat-card-header class="card-header">
+            <div mat-card-avatar  class="rating">{{series?.vote_average ?? '-'}}</div>
+            <mat-card-title class="autoScaleText">{{series?.name}}</mat-card-title>
+            <mat-card-subtitle>Release date:{{series?.first_air_date}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="IMAGE_PATH + series?.backdrop_path" alt="Title screen of movie" *ngIf="series?.backdrop_path != undefined">
+            <mat-card-content class="content">
+                <h3> Overview</h3>   
+                <p>
+                    {{series?.overview}}
+                </p>
+                <h3>Seasons</h3>
+                <mat-chip-list aria-label="Fish selection">
+                        <mat-chip 
+                        *ngFor="let season of series?.seasons"
+                        [routerLink]="['/seasondetails', series.id, season.season_number]"
+                        color="primary" 
+                        selected >{{season.name}}</mat-chip>
+                  </mat-chip-list>
+                <h3>Genres</h3>
+                <mat-chip-list aria-label="Fish selection">
+                    <div *ngFor="let genre of series?.genres">
+                        <mat-chip color="primary" selected >{{genre.name}}</mat-chip>
+                    </div>
+                  </mat-chip-list>
+                <h3>Producing companies</h3>
+                <mat-chip-list aria-label="Fish selection">
+                    <mat-chip color="primary" selected *ngFor="let company of series?.production_companies">{{company.name}}</mat-chip>
+                  </mat-chip-list>
+                <h3>Actors</h3>
+                  <mat-chip-list aria-label="Fish selection">
+                      <mat-chip  [routerLink]="['/actordetials', actor.id]" color="primary" selected *ngFor="let actor of actors">{{actor.name}}</mat-chip>
+                    </mat-chip-list>
+                <h3>Similar shows</h3>
+                <mat-chip-list aria-label="Fish selection">
+                    <div (click)="onSimilarSelected(serie.id)" *ngFor="let serie of similarShows">
+                        <mat-chip color="primary" selected >{{serie.name}}</mat-chip>
+                    </div>
+                  </mat-chip-list>
+                <h3>Reviews</h3>
+                <div class="reviews">
+                    <div class="review" *ngFor="let review of this.reviews">
+                        <div class="review-header">
+                            <span>{{review.author_details.username}}</span>
+                            <span><i>{{review.created_at | date:'longDate'}}</i></span>
+                            <span><b>Rating: {{review.author_details.rating ?? '-'}}</b></span>
+                        </div>
+                        <div class="review-content">
+                            {{review.content}}
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+</div>

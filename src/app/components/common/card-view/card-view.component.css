@@ -1,0 +1,29 @@
+.card-view {
+    max-width: 350px;
+    min-width: 350px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  .rating{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #FFC107;
+  }
+
+  .card-header{
+      min-height: 80px;
+  }
+
+  .content{
+      text-overflow: ellipsis;
+      overflow: hidden; 
+      height: 65px;
+  }
+
+  img{
+      max-height: 215px;
+  }

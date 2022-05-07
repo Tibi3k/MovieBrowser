@@ -1,0 +1,13 @@
+<mat-card class="card-view" (click)="onMovieSelected()">
+    <mat-card-header class="card-header">
+    <div mat-card-avatar  class="rating">{{this.convertRatingToString(this.rating)}}</div>
+    <mat-card-title class="autoScaleText">{{this.title}}</mat-card-title>
+    <mat-card-subtitle>Release date:{{this.releaseDate}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="getImagePath(this.imagePath)" alt="Title screen of movie">
+    <mat-card-content class="content">
+        <p>
+            {{this.overview}}
+        </p>
+    </mat-card-content>
+</mat-card>
