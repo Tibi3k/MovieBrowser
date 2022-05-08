@@ -24,8 +24,8 @@ jobs:
       - name: npm install, build, and test
         run: |
           npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm run build --prod
+        working-directory: .
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -53,4 +53,4 @@ jobs:
           app-name: 'moviebrowserapp'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F213DFD637B541459A1BA2BED057735B }}
-          package: .
+          package: ./dist/hello-world-app
