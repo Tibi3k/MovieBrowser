@@ -26,27 +26,27 @@ export class DetailsComponent implements OnInit {
   similarMovies: Movie[] = []
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(paramMap => {
-      console.log()
-      console.log('url' + this.router.url)
-      if(paramMap.has('id')){
-          let id: number = Number.parseInt(paramMap.get('id')!)
-          this.movieService.getMovieDetails(id)
-          .subscribe(result => {this.movie = result; console.log(result)})
-          this.movieService.getReviewsOfMovie(id)
-           .subscribe(result => {this.reviews = result.results})
-          this.movieService.getSimilarMovie(id)
-            .subscribe(results => this.similarMovies = results.results)
-           this.movieService.getCreditsOfMovie(id)
-           .subscribe(result => {
-             this.actors = result.cast
-             .filter(member => member.known_for_department == 'Acting')
-            })
+    // this.route.paramMap.subscribe(paramMap => {
+    //   console.log()
+    //   console.log('url' + this.router.url)
+    //   if(paramMap.has('id')){
+    //       let id: number = Number.parseInt(paramMap.get('id')!)
+    //       this.movieService.getMovieDetails(id)
+    //       .subscribe(result => {this.movie = result; console.log(result)})
+    //       this.movieService.getReviewsOfMovie(id)
+    //        .subscribe(result => {this.reviews = result.results})
+    //       this.movieService.getSimilarMovie(id)
+    //         .subscribe(results => this.similarMovies = results.results)
+    //        this.movieService.getCreditsOfMovie(id)
+    //        .subscribe(result => {
+    //          this.actors = result.cast
+    //          .filter(member => member.known_for_department == 'Acting')
+    //         })
         
-      } else {
-        this.router.navigate([''])
-      }
-    })
+    //   } else {
+    //     this.router.navigate([''])
+    //   }
+    // })
   }
 
   onSimilarSelected(id: number){

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { AngularMaterialModule } from './angular-material.module';
+//import { AngularMaterialModule } from './angular-material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/common/header/header.component';
@@ -16,6 +16,20 @@ import { ListSeriesComponent } from './components/pages/list-series/list-series.
 import { SeriesDetailsComponent } from './components/pages/series-details/series-details.component';
 import { ActorDetailsComponent } from './components/pages/actor-details/actor-details.component';
 import { SeasonDetailsComponent } from './components/pages/season-details/season-details.component';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+
+import { MatSelectModule } from '@angular/material/select';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatButtonModule } from "@angular/material/button";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -34,8 +48,20 @@ import { SeasonDetailsComponent } from './components/pages/season-details/season
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AngularMaterialModule,
     BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatRadioModule,
+    MatCardModule,
+    MatPaginatorModule,
+    MatSelectModule,
+    MatChipsModule,
+    MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatExpansionModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ApiKeyInterceptor, multi: true},
