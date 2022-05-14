@@ -76,17 +76,11 @@ export class ListMoviesComponent implements OnInit {
   }
 
   /**
-   * refreses the page with content
-   */
-  onSelectionChanged(){
-    this.getDataFromServer()
-  }
-
-  /**
    * sets the page index to 0 and refreshes the page
    */
   onSearch(){
     this.pageIndex = 0
+    this.savePageDetails()
     this.getDataFromServer()
   }
 

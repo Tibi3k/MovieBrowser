@@ -81,6 +81,7 @@ export class ListSeriesComponent implements OnInit {
   onSearch(){
     this.pageIndex = 0
     this.queryString = this.form.value.name
+    this.savePageDetails()
     this.getDataFromServer()
   }
 
