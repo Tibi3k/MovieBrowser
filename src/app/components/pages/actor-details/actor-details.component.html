@@ -17,12 +17,11 @@
                 <i>{{this.actorDetails?.place_of_birth}}</i><br>
                 <i>{{this.actorDetails?.birthday}}</i>
             </div>
-            <div *ngIf="this.actorDetails?.biography != ''" class="biography data-field">
-                <h3>Biography</h3>
-                <div>{{this.actorDetails?.biography}}</div>  
-            </div>
-
         </div>
+    </div>
+    <div *ngIf="this.actorDetails?.biography != ''" class="biography data-field">
+        <h3>Biography</h3>
+        <div>{{this.actorDetails?.biography}}</div>  
     </div>
     <div class="bottom-container">
         <div>

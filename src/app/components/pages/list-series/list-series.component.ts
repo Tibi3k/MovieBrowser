@@ -28,26 +28,37 @@ export class ListSeriesComponent implements OnInit {
   pageEvent: PageEvent | undefined;
   pageSize = 20;
   pageIndex = 0;
+  queryString = ""
 
   ngOnInit(): void {
-    this.getDataFromServer()
     this.form = new FormGroup({
       name: new FormControl(null)
     })
+    this.loadPageDetails()
+    this.getDataFromServer()
   }
 
+  /**
+   * saves the page index and size on navigation event
+   * @param event navigation event
+   * @returns the current event
+   */
   public getServerData(event?:PageEvent){
     this.pageSize = event?.pageSize ?? 20
     this.pageIndex = event?.pageIndex ?? 0
+    this.savePageDetails()
     this.getDataFromServer() 
     return event;
   }
   
+  /**
+   * gets the series data form the API using page index and size and also the search word
+   */
   getDataFromServer(){
     let pageIndex = this.pageSize/20 * this.pageIndex
     let result: Observable<SeriesResult[]>
-    if(this.form != undefined && this.form.value != undefined && this.form?.value?.name != '' && this.form?.value?.name != null){
-      result = this.seriesService.getSeriesSearch(pageIndex,this.pageSize/20, this.form.value.name)
+    if(this.form != undefined && this.form.value != undefined && this.queryString != '' && this.queryString != null){
+      result = this.seriesService.getSeriesSearch(pageIndex,this.pageSize/20, this.queryString)
     } else {
       result = this.seriesService.getTrendingSeries(pageIndex, this.pageSize/20)
     }
@@ -64,13 +75,32 @@ export class ListSeriesComponent implements OnInit {
     })
   }
 
-  onSelectionChanged(){
+  /**
+   * refreshes the page with the new searchword
+   */
+  onSearch(){
+    this.pageIndex = 0
+    this.queryString = this.form.value.name
     this.getDataFromServer()
   }
 
-  onSearch(){
-    this.pageIndex = 0
-    this.getDataFromServer()
+  /**
+ * saves the current pagination data to localStorage
+ */
+  savePageDetails() {
+    localStorage.setItem("seriesPageIndex", this.pageIndex.toString())
+    localStorage.setItem("seriesPageSize", this.pageSize.toString())
+    localStorage.setItem("seriesPageQuerry", this.queryString ?? "")
+  }
+
+  /**
+   * loads the saved pagination data from localStorage
+   */
+  loadPageDetails() {
+    this.pageIndex = Number.parseInt(localStorage.getItem("seriesPageIndex") ?? "0")
+    this.pageSize = Number.parseInt(localStorage.getItem("seriesPageSize") ?? "20")
+    this.queryString = localStorage.getItem("seriesPageQuerry") ?? ""
+    this.form.controls['name'].setValue(localStorage.getItem("seriesPageQuerry") ?? "")
   }
 
 }

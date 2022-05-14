@@ -1,14 +1,11 @@
 <mat-toolbar color="primary" class="toolbar">
-    <span>My App</span>
+    <span>Movie Browser</span>
     <ul>
-        <li routerLink="/">
+        <li (click)="this.navigateToMoviePage()">
             Movies
         </li>   
-        <li routerLink="/series">
+        <li (click)="this.navigateToSeriesPage()">
             Series
-        </li>   
-        <li routerLink="/discover">
-            asdf
         </li>   
     </ul>
 

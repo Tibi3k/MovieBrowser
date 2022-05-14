@@ -47,6 +47,10 @@ export class SeriesDetailsComponent implements OnInit {
     })
   }
 
+  /**
+   * navigates to a different series details page
+   * @param id the id of the series
+   */
   onSimilarSelected(id: number){
     this.router.navigate(['seriesdetails', id])
   }

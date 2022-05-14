@@ -5,10 +5,14 @@ import { environment } from "src/environments/environment";
 
 @Injectable()
 export class ApiKeyInterceptor implements HttpInterceptor {
+
+  /**
+   * attatches the api key to every request
+   * @param request the current requst
+   * @param next the next middleware
+   * @returns the modified request
+   */
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    //   var newParams = request.params
-    //   console.log('params')
-    //   newParams.append('api_key', environment.API_KEY)
       const newRequest = request.clone({
           setParams: {'api_key': environment.API_KEY}
       })

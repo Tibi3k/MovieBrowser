@@ -20,6 +20,9 @@ export class SeasonDetailsComponent implements OnInit {
   season: Season | null = null
   IMAGE_PATH = environment.IMAGE_ROUTE
 
+  /**
+   * reads the series id from the URL and gets the details, navigate to main page if id does not exists
+   */
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
       if(paramMap.has('seriesId') && paramMap.has('seasonNumber')){
@@ -32,7 +35,6 @@ export class SeasonDetailsComponent implements OnInit {
       }
     })
 
-    var a = ''
   }
 
 }

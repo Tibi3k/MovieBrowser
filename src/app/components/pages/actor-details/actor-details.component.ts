@@ -17,24 +17,52 @@ export class ActorDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) { }
+
   IMAGE_PATH = environment.IMAGE_ROUTE + 'h632' 
   actorDetails: ActorDetails | null = null
   actorMovieParticipations: MovieParticipation | null = null
   actorSeriesParticipations: SeriesParticipation | null = null
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
+      //the actorId param is required, only proceed if present
       if(paramMap.has('actorId')){
         let actorId = Number.parseInt(paramMap.get('actorId')!)
-        this.actorService.getActorDetails(actorId)
-          .subscribe(details => {this.actorDetails = details; console.log(this.actorDetails)})
-        this.actorService.getMovieCreditsOfActor(actorId)
-          .subscribe(details => this.actorMovieParticipations = details)
-        this.actorService.getSeriesCreditsOfActor(actorId)
-          .subscribe(details => this.actorSeriesParticipations = details)
+        this.getActorDetails(actorId)
+        this.getMovieCredits(actorId)
+        this.getSeriesCredits(actorId)
       } else {
+        //the page was called with invalid parameters, redirect to main page
         this.router.navigate([''])
       }
     })
+  }
+
+  /**
+   * get extra details for the current actor 
+   * @param actorId id of the current actor
+   */
+  private getActorDetails(actorId: number){
+    this.actorService.getActorDetails(actorId)
+      .subscribe(details => {this.actorDetails = details; console.log(this.actorDetails)})
+  }
+
+  /**
+   * gets all the movies the actor is associated with
+   * @param actorId id of the current actor
+   */
+  private getMovieCredits(actorId: number){
+    this.actorService.getMovieCreditsOfActor(actorId)
+      .subscribe(details => this.actorMovieParticipations = details)
+  }
+
+  /**
+   * gets every tv show the actor is associated with
+   * @param actorId id of the current actor
+   */
+  private getSeriesCredits(actorId: number){
+    this.actorService.getSeriesCreditsOfActor(actorId)
+      .subscribe(details => this.actorSeriesParticipations = details)
   }
 
 }
